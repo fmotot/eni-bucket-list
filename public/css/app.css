@@ -83,21 +83,33 @@ footer p {
 
 .team-members article {
     display: flex;
-    margin-bottom: 20px;
-}
-
-.team-members article:nth-child(odd) {
-    flex-direction: row-reverse;
-}
-
-.team-members article:nth-child(odd) img {
-    margin-right: 0;
-    margin-left: 20px;
+    flex-direction: column;
+    margin: 30px 0;
 }
 
 .team-members article img {
-    max-width: 210px;
+    width: 210px;
     border-radius: 50%;
-    margin-right: 20px;
+    margin: auto;
     box-shadow: 1px 1.5px 5px -2px rgba(0,0,0,0.5);
+}
+
+@media screen and (min-width: 680px) {
+    .team-members article {
+        flex-direction: row;
+    }
+
+    .team-members article:nth-child(odd) {
+        flex-direction: row-reverse;
+    }
+
+    .team-members article img {
+        margin-right: 20px;
+    }
+
+    .team-members article:nth-child(odd) img {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+
 }
