@@ -21,7 +21,14 @@ class MainController extends Controller
     public function aboutUs()
     {
         //tp surprise
+        //le chemin est relatif au contrôleur front (public/index.php)
+        $rawData = file_get_contents("../src/data/team.json");
+        //convertie la chaîne en tableau !
+        $teamMembers = json_decode($rawData);
 
-        return $this->render('default/about_us.html.twig', []);
+        return $this->render('default/about_us.html.twig', [
+            //crée une variable teamMembers dans mon fichier twig !
+            "teamMembers" => $teamMembers
+        ]);
     }
 }
