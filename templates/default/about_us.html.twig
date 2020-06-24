@@ -7,10 +7,13 @@
     <section class="team-members">
         {% for member in teamMembers %}
             <article>
-                <h3>{{ member.firstname }} {{ member.lastname }} {{ member.firstname == "Fabien" ? "&#128151;️" : "" }}</h3>
-                <p>Creator of {{ member.creatorOf }}</p>
-                <p>Date of birth: {{ member.dateOfBirth|date("d-m-Y") }}</p>
                 <img src="{{ member.picture }}" alt="{{ member.lastname }}">
+                <div>
+                    <h3>{{ member.firstname }} {{ member.lastname }} {{ member.firstname == "Fabien" ? "&#128151;️" : "" }}</h3>
+                    <p>Creator of {{ member.creatorOf }}</p>
+                    <p>Date of birth: {{ member.dateOfBirth|date("d-m-Y") }}</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, cumque facilis harum id ipsam necessitatibus veniam! Adipisci alias delectus harum impedit ipsum, iste laboriosam natus possimus provident ratione velit voluptatibus? </p>
+                </div>
             </article>
         {% endfor %}
     </section>
