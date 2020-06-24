@@ -20,6 +20,8 @@ class MainController extends Controller
      */
     public function aboutUs()
     {
-        return $this->render('default/about_us.html.twig');
+        //tp surprise
+
+        return $this->render('default/about_us.html.twig', []);
     }
 }
