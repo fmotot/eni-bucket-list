@@ -8,18 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class IdeaController extends Controller
 {
     /**
-     * @Route("/ideas", name="list")
+     * @Route("/ideas", name="idea_list")
      */
     public function list()
     {
-        return $this->render('default/list.html.twig', []);
+        return $this->render('idea/list.html.twig', []);
     }
 
     /**
-     * @Route("/ideas/detail", name="detail")
+     * @Route("/ideas/detail", name="idea_detail")
      */
     public function detail()
     {
-        return $this->render('default/detail.html.twig', []);
+        return $this->render('idea/detail.html.twig', []);
     }
 }
