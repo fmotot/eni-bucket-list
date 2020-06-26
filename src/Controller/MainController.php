@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
+use App\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 
 class MainController extends Controller
 {
@@ -31,4 +35,47 @@ class MainController extends Controller
             "teamMembers" => $teamMembers
         ]);
     }
+
+    /**
+     * @Route("/create-post", name="create_post", methods={"GET", "POST"})
+     */
+    public function createPost(Request $request)
+    {
+        //crée l'entité vide qui sera sauvegardée lorsque ce sera soumis
+        $post = new Post();
+        //renseigne la date actuelle, car ce champ n'est pas dans le form
+        //(il y a un "use" dans le haut du fichier !)
+        $post->setDatePublished(new DateTime());
+
+        //crée une instance de notre form, en lui associant notre entité vide
+        $postForm = $this->createForm("App\Form\PostType", $post);
+
+        //prend les données soumises par le formulaire et les injecte dans $post
+        $postForm->handleRequest($request);
+
+        if ($postForm->isSubmitted() && $postForm->isValid()){
+            //l'entity manager nous permet de faire les insert, update et delete !
+            $em = $this->getDoctrine()->getManager();
+            //on demande à Doctrine de sauvegarder notre instance en bdd
+            $em->persist($post);
+            //et on confirme !
+            $em->flush();
+        }
+
+        //crée une version de notre form optimisée pour l'affichage dans twig
+        $postFormView = $postForm->createView();
+
+        return $this->render("default/create_post.html.twig", compact("postFormView"));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
