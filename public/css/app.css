@@ -119,6 +119,26 @@ form[name="post"] textarea {
     min-height: 100px;
 }
 
+.invalid-feedback {
+    display: block;
+    color: tomato;
+    font-weight: bold;
+}
+
+
+.alert {
+    padding: 30px;
+    background-color: #718C00;
+    color: #FFF;
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.alert-success {
+
+}
+
 @media screen and (min-width: 680px) {
     .team-members article {
         flex-direction: row;

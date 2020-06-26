@@ -60,6 +60,12 @@ class MainController extends Controller
             $em->persist($post);
             //et on confirme !
             $em->flush();
+
+            //message qui s'affichera sur la prochaine page !
+            $this->addFlash("success", "Your post is published!");
+
+            //recharge la page pour vider le form
+            return $this->redirectToRoute("home");
         }
 
         //crée une version de notre form optimisée pour l'affichage dans twig

@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity(fields={"title", "content"}, message="This post already exists!")
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
 class Post
@@ -18,22 +21,32 @@ class Post
     private $id;
 
     /**
-     *
+     * @Assert\NotBlank(message="Please provide a title dude!")
+     * @Assert\Length(
+     *     min="2",
+     *     minMessage="Your title is too short, comon!",
+     *     max="255",
+     *     maxMessage="Max 255 please!"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Please provide a content dude!")
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
+     * @Assert\Regex(pattern="/^[a-zA-Z]+$/", message="Your name is strange")
+     * @Assert\NotBlank(message="Who the f are you?")
      * @ORM\Column(type="string", length=100)
      */
     private $author;
 
     /**
+     * @Assert\Type(type="boolean", message="what !?!?!?")
      * @ORM\Column(type="boolean")
      */
     private $isFeatured;
