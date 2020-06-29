@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Idea;
+use App\Form\IdeaType;
 use App\Repository\IdeaRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 
 class IdeaController extends Controller
 {
@@ -37,5 +41,29 @@ class IdeaController extends Controller
 
         //compact crée un tableau associatif en recherchant les variables passées sous forme de chaîne
         return $this->render('idea/detail.html.twig', compact("idea", "pif"));
+    }
+
+    /**
+     * @Route("/ideas/add", name="idea_add", methods={"GET", "POST"})
+     */
+    public function add(Request $request, EntityManagerInterface $em)
+    {
+        $idea = new Idea();
+        $idea->setIsPublished(true);
+        $idea->setDateCreated(new DateTime());
+
+        $form = $this->createForm(IdeaType::class, $idea);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $em->persist($idea);
+            $em->flush();
+
+            $this->addFlash("success", "Idea successfully added!");
+            return $this->redirectToRoute("idea_detail", ["id" => $idea->getId()]);
+        }
+
+        return $this->render("idea/add.html.twig", [
+            "form" => $form->createView()
+        ]);
     }
 }

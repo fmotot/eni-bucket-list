@@ -95,27 +95,27 @@ footer p {
 }
 
 
-form[name="post"] label {
+form label {
     display: block;
 }
 
-/* la classe form-check existe parce que j'ai activé le thème de formulaire bootstrap */
-form[name="post"] label.form-check-label {
+/* la classe form-check existe parce que j'ai activé le thème de formulaire bootstrap dans config/packages/twig.yaml */
+form label.form-check-label {
     display: inline-block;
 }
 
-form[name="post"] input,
-form[name="post"] textarea {
+form input,
+form textarea {
     margin-bottom: 15px;
 }
 
-form[name="post"] input[type="text"],
-form[name="post"] textarea {
+form input[type="text"],
+form textarea {
     box-sizing: border-box;
     min-width: 250px;
 }
 
-form[name="post"] textarea {
+form textarea {
     min-height: 100px;
 }
 
