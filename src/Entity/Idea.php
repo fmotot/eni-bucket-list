@@ -3,15 +3,26 @@
 namespace App\Entity;
 
 use App\Repository\IdeaRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass=IdeaRepository::class)
  */
 class Idea
 {
+    /**
+     * @ORM\PrePersist()
+     */
+    public function doBeforeInsert()
+    {
+        $this->setIsPublished(true);
+        $this->setDateCreated(new DateTime());
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -51,7 +62,7 @@ class Idea
      * @Assert\NotBlank(message="Please provide your username!")
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
+     *      max = 30,
      *      minMessage = "Your username must be at least {{ limit }} characters long",
      *      maxMessage = "Your username cannot be longer than {{ limit }} characters"
      * )

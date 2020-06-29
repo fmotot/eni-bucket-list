@@ -49,8 +49,7 @@ class IdeaController extends Controller
     public function add(Request $request, EntityManagerInterface $em)
     {
         $idea = new Idea();
-        $idea->setIsPublished(true);
-        $idea->setDateCreated(new DateTime());
+        //les données manquantes sont renseignées directement dans l'entité ! voir le PrePersist()
 
         $form = $this->createForm(IdeaType::class, $idea);
         $form->handleRequest($request);

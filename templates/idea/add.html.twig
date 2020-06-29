@@ -2,7 +2,7 @@
 
 {% block main %}
     <h2>Add your idea!</h2>
-    {{ form(form) }}
+    {{ form(form, {attr: {"novalidate": "novalidate"}}) }}
 {% endblock %}
 
 {% block title %}
